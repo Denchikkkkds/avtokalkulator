@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>АвтоКалькулятор — витрати на пальне, поїздки та економія</title>
+  <meta name="description" content="Безкоштовні автомобільні калькулятори: витрата пального, вартість поїздки, витрати на місяць та порівняння авто. Працює прямо у браузері.">
+  <meta name="keywords" content="калькулятор витрати пального, вартість поїздки на авто, витрата бензину, дизель, автомобільний калькулятор">
+  <meta property="og:title" content="АвтоКалькулятор — рахуйте витрати на авто">
+  <meta property="og:description" content="Безкоштовні інструменти для водіїв. Без реєстрації.">
+  <meta property="og:type" content="website">
+  <style>
+    :root{--bg:#0b1220;--panel:#111c30;--panel2:#16243a;--text:#f2f6fc;--muted:#a8b7cc;--accent:#65e0b5;--accent2:#8bb8ff;--line:#2a3b55;--danger:#ffb6a7}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(ellipse at top right,#172e49 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:var(--accent2)}
+    .wrap{width:min(1100px,92%);margin:auto}
+    header{padding:28px 0 48px}
+    nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .brand{font-weight:850;font-size:1.15rem;letter-spacing:.2px}.brand span{color:var(--accent)}
+    .navlink{color:var(--muted);text-decoration:none;font-size:.94rem}
+    .hero{padding:55px 0 18px;max-width:760px}
+    .eyebrow{color:var(--accent);font-weight:750;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem}
+    h1{font-size:clamp(2.3rem,6vw,4.5rem);line-height:1.03;letter-spacing:-.05em;margin:15px 0 20px}
+    .hero p{font-size:1.12rem;color:var(--muted);max-width:650px}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .chip{border:1px solid var(--line);border-radius:99px;padding:7px 12px;color:#d8e4f4;font-size:.88rem}
+    main{padding-bottom:60px}
+    .sectionhead{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:26px 0 18px;flex-wrap:wrap}
+    h2{font-size:1.65rem;letter-spacing:-.025em;margin:0}
+    .sectionhead p{color:var(--muted);margin:0}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{background:linear-gradient(150deg,rgba(22,36,58,.97),rgba(17,28,48,.97));border:1px solid var(--line);border-radius:22px;padding:23px;box-shadow:0 14px 40px rgba(0,0,0,.12)}
+    .card h3{margin:0 0 4px;font-size:1.22rem}.sub{margin:0 0 20px;color:var(--muted);font-size:.94rem}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+    label{display:block;color:#d7e2f0;font-size:.88rem;margin-bottom:6px}
+    input,select{width:100%;padding:12px 13px;border-radius:12px;border:1px solid #344963;background:#0c1728;color:var(--text);font:inherit;outline:none}
+    input:focus,select:focus{border-color:var(--accent2);box-shadow:0 0 0 3px #8bb8ff20}
+    button{border:0;border-radius:12px;background:var(--accent);color:#071b18;font:800 1rem system-ui;padding:12px 16px;cursor:pointer;margin-top:16px;width:100%}
+    button:hover{filter:brightness(1.05)}
+    .result{background:#0a1726;border:1px solid #29445a;border-radius:15px;padding:15px;margin-top:15px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .result small{display:block;color:var(--muted)}.result strong{font-size:1.35rem;color:var(--accent);text-align:right}
+    .note{color:var(--muted);font-size:.85rem;margin:13px 0 0}
+    .wide{grid-column:1/-1}
+    .featurelist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+    .feature{padding:18px;border-radius:16px;background:#111c30;border:1px solid var(--line)}
+    .feature b{display:block;margin-bottom:5px}.feature p{margin:0;color:var(--muted);font-size:.92rem}
+    .article{margin-top:34px;background:#0f1a2c;border:1px solid var(--line);border-radius:22px;padding:24px}
+    .article h2{margin-bottom:12px}.article h3{margin:22px 0 6px}.article p,.article li{color:#c1cede}
+    .faq details{border-top:1px solid var(--line);padding:14px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{color:var(--muted);margin-bottom:0}
+    footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:.9rem}
+    .smallprint{font-size:.82rem;color:var(--muted)}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.featurelist{grid-template-columns:1fr}.hero{padding-top:35px}.card{padding:18px}.fields{gap:11px}}
+    @media(max-width:390px){.fields{grid-template-columns:1fr}.result{align-items:flex-start;flex-direction:column}.result strong{text-align:left}}
+  </style>
+</head>
+<body>
+<header class="wrap">
+  <nav>
+    <div class="brand">Авто<span>Калькулятор</span></div>
+    <a class="navlink" href="#tools">Калькулятори</a>
+    <a class="navlink" href="#guide">Поради водіям</a>
+    <a class="navlink" href="#faq">Питання</a>
+  </nav>
+  <div class="hero">
+    <div class="eyebrow">Безкоштовні інструменти для водіїв</div>
+    <h1>Знай, скільки насправді коштує твоя поїздка.</h1>
+    <p>Розраховуй витрату пального, бюджет на дорогу та місячні витрати на авто. Без реєстрації, безкоштовно і прямо у браузері.</p>
+    <div class="chips"><span class="chip">✓ Безкоштовно</span><span class="chip">✓ Працює на телефоні</span><span class="chip">✓ Дані залишаються у браузері</span></div>
+  </div>
+</header>
+<main class="wrap" id="tools">
+  <div class="sectionhead"><div><h2>Калькулятори</h2><p>Введи свої дані — результат оновиться одразу після натискання.</p></div></div>
+  <div class="grid">
+    <section class="card">
+      <h3>⛽ Витрата пального</h3><p class="sub">Скільки літрів на 100 км споживає авто?</p>
+      <div class="fields">
+        <div><label for="fuelUsed">Витрачено пального, л</label><input id="fuelUsed" type="number" min="0" step="0.1" value="35"></div>
+        <div><label for="distance">Пройдена відстань, км</label><input id="distance" type="number" min="0" step="1" value="420"></div>
+      </div>
+      <button onclick="calcConsumption()">Розрахувати витрату</button>
+      <div class="result" aria-live="polite"><div><small>Середня витрата</small><span>на 100 км</span></div><strong id="consResult">8,3 л/100 км</strong></div>
+      <p class="note">Для точнішого результату заправляйся до однакового рівня та фіксуй пробіг.</p>
+    </section>
+    <section class="card">
+      <h3>🛣️ Вартість поїздки</h3><p class="sub">Оціни бюджет на пальне до пункту призначення.</p>
+      <div class="fields">
+        <div><label for="tripDistance">Відстань, км</label><input id="tripDistance" type="number" min="0" step="1" value="250"></div>
+        <div><label for="tripConsumption">Витрата, л/100 км</label><input id="tripConsumption" type="number" min="0" step="0.1" value="8.5"></div>
+        <div><label for="fuelPrice">Ціна за літр, грн</label><input id="fuelPrice" type="number" min="0" step="0.01" value="58"></div>
+        <div><label for="passengers">Кількість людей</label><input id="passengers" type="number" min="1" step="1" value="2"></div>
+      </div>
+      <button onclick="calcTrip()">Порахувати поїздку</button>
+      <div class="result" aria-live="polite"><div><small>Вартість пального</small><span id="tripLitres">21,3 л на дорогу</span></div><strong id="tripResult">1 233 грн</strong></div>
+      <p class="note">Розрахунок не враховує платні дороги, паркування та знос автомобіля.</p>
+      <div class="result"><div><small>На одну людину</small><span>якщо ділити порівну</span></div><strong id="perPerson">616,50 грн</strong></div>
+    </section>
+    <section class="card">
+      <h3>📆 Місячний бюджет на пальне</h3><p class="sub">Оціни, скільки витрачаєш за місяць.</p>
+      <div class="fields">
+        <div><label for="monthlyKm">Кілометрів на місяць</label><input id="monthlyKm" type="number" min="0" step="50" value="1200"></div>
+        <div><label for="monthlyCons">Витрата, л/100 км</label><input id="monthlyCons" type="number" min="0" step="0.1" value="9"></div>
+        <div class="wide"><label for="monthlyPrice">Ціна за літр, грн</label><input id="monthlyPrice" type="number" min="0" step="0.01" value="58"></div>
+      </div>
+      <button onclick="calcMonthly()">Розрахувати бюджет</button>
+      <div class="result" aria-live="polite"><div><small>Витрати за місяць</small><span id="monthlyLitres">108 л пального</span></div><strong id="monthlyResult">6 264 грн</strong></div>
+    </section>
+    <section class="card">
+      <h3>⚖️ Порівняння двох авто</h3><p class="sub">Порівняй витрати на пальне для однакового пробігу.</p>
+      <div class="fields">
+        <div><label for="carA">Авто A, л/100 км</label><input id="carA" type="number" min="0" step="0.1" value="7"></div>
+        <div><label for="carB">Авто B, л/100 км</label><input id="carB" type="number" min="0" step="0.1" value="10"></div>
+        <div><label for="compareKm">Пробіг на місяць, км</label><input id="compareKm" type="number" min="0" step="50" value="1200"></div>
+        <div><label for="comparePrice">Ціна пального, грн/л</label><input id="comparePrice" type="number" min="0" step="0.01" value="58"></div>
+      </div>
+      <button onclick="calcCompare()">Порівняти</button>
+      <div class="result" aria-live="polite"><div><small>Різниця за місяць</small><span id="compareText">Авто A економніше</span></div><strong id="compareResult">2 088 грн</strong></div>
+      <p class="note">Порівняння враховує тільки пальне, а не ремонт, страхування чи ціну придбання.</p>
+    </section>
+  </div>
+
+  <div class="featurelist">
+    <div class="feature"><b>🔒 Приватність</b><p>Обчислення виконуються на пристрої. Введені цифри нікуди не надсилаються.</p></div>
+    <div class="feature"><b>📱 Для смартфона</b><p>Адаптивний дизайн зручний у дорозі та на маленькому екрані.</p></div>
+    <div class="feature"><b>🧮 Без складнощів</b><p>Прості формули та зрозумілі результати без створення акаунта.</p></div>
+  </div>
+
+  <article class="article" id="guide">
+    <div class="eyebrow">Короткий гід</div>
+    <h2>Як правильно порахувати витрату пального</h2>
+    <p>Бортовий комп’ютер дає орієнтовне значення, але реальну витрату можна перевірити самостійно. Заправ авто до однакового рівня, обнули лічильник пробігу, проїдь звичний маршрут і знову заправся до того самого рівня.</p>
+    <h3>Формула витрати</h3>
+    <p><strong>Витрата (л/100 км) = витрачені літри ÷ пройдені кілометри × 100.</strong> Наприклад, 35 літрів на 420 км — це приблизно 8,33 л/100 км.</p>
+    <h3>Що впливає на витрату</h3>
+    <ul><li>короткі поїздки та холодний двигун;</li><li>швидкість, затори й різкі прискорення;</li><li>тиск у шинах і зайва вага;</li><li>стан двигуна, фільтрів та системи запалювання.</li></ul>
+    <p>Порівнюй показники в схожих умовах. Одне вимірювання не завжди показує звичну витрату автомобіля.</p>
+  </article>
+  <section class="article faq" id="faq">
+    <h2>Часті питання</h2>
+    <details><summary>Чи безкоштовні калькулятори?</summary><p>Так. Усі розрахунки на цій сторінці безкоштовні, реєстрація не потрібна.</p></details>
+    <details><summary>Чи зберігаються мої дані?</summary><p>Ні. Значення використовуються лише для розрахунків у відкритій сторінці та не відправляються на сервер.</p></details>
+    <details><summary>Чому фактична витрата відрізняється?</summary><p>На неї впливають маршрут, температура, завантаження, стиль водіння, технічний стан і точність вимірювання.</p></details>
+    <details><summary>Чи включено всі витрати на автомобіль?</summary><p>Ні. Калькулятори оцінюють лише пальне. Для повної вартості володіння потрібно додатково враховувати обслуговування, шини, страхування, податки та знецінення.</p></details>
+  </section>
+</main>
+<footer><div class="wrap">
+  <div class="brand">Авто<span>Калькулятор</span></div>
+  <p>Безкоштовні інструменти для щоденних розрахунків водіїв.</p>
+  <p class="smallprint">Результати орієнтовні та залежать від точності введених даних. Сайт не надає професійних фінансових чи технічних консультацій.</p>
+  <p>© <span id="year"></span> АвтоКалькулятор</p>
+</div></footer>
+<script>
+  const num = id => Math.max(0, Number(document.getElementById(id).value) || 0);
+  const fmt = (n, digits=2) => n.toLocaleString('uk-UA',{minimumFractionDigits:0,maximumFractionDigits:digits});
+  const money = n => n.toLocaleString('uk-UA',{minimumFractionDigits:0,maximumFractionDigits:2})+' грн';
+  function calcConsumption(){
+    const l=num('fuelUsed'), km=num('distance');
+    document.getElementById('consResult').textContent=km>0?fmt(l/km*100,2)+' л/100 км':'Введи відстань';
+  }
+  function calcTrip(){
+    const km=num('tripDistance'), c=num('tripConsumption'), p=num('fuelPrice'), people=Math.max(1,Math.floor(num('passengers')));
+    const litres=km*c/100, cost=litres*p;
+    document.getElementById('tripLitres').textContent=fmt(litres,2)+' л на дорогу';
+    document.getElementById('tripResult').textContent=money(cost);
+    document.getElementById('perPerson').textContent=money(cost/people);
+  }
+  function calcMonthly(){
+    const litres=num('monthlyKm')*num('monthlyCons')/100;
+    document.getElementById('monthlyLitres').textContent=fmt(litres,2)+' л пального';
+    document.getElementById('monthlyResult').textContent=money(litres*num('monthlyPrice'));
+  }
+  function calcCompare(){
+    const a=num('carA'),b=num('carB'),km=num('compareKm'),p=num('comparePrice');
+    const diff=Math.abs(a-b)*km/100*p;
+    document.getElementById('compareText').textContent=a===b?'Однакові витрати':(a<b?'Авто A економніше':'Авто B економніше');
+    document.getElementById('compareResult').textContent=money(diff);
+  }
+  document.getElementById('year').textContent=new Date().getFullYear();
+  calcConsumption();calcTrip();calcMonthly();calcCompare();
+</script>
+</body>
+</html>
